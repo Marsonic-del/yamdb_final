@@ -1,5 +1,7 @@
 # Проект API для YaMDb #
 
+## Адрес сайта: http://51.250.17.93/
+
 ![workflow](https://github.com/Marsonic-del/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 ## Описание: ##
