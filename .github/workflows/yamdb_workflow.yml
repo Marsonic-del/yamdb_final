@@ -22,7 +22,6 @@ jobs:
 
     - name: Test with flake8 and pytest
       run: |
-        cd ../..
         # запуск проверки проекта по flake8
         python -m flake8
         # запуск pytest
