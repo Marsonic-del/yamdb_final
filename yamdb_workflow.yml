@@ -18,14 +18,13 @@ jobs:
         # обновление pip
         python -m pip install --upgrade pip 
         # установка зависимостей
-        pip install -r api_yamdb/requirements.txt 
+        pip install -r requirements.txt 
 
     - name: Test with flake8 and pytest
       run: |
         # запуск проверки проекта по flake8
         python -m flake8
         # запуск pytest
-        cd ../..
         pytest
   
   build_and_push_to_docker_hub:
@@ -81,4 +80,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выполнен!          
+        message: ${{ github.workflow }} успешно выполнен!
