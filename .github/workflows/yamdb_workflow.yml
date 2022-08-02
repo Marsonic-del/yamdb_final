@@ -18,10 +18,11 @@ jobs:
         # обновление pip
         python -m pip install --upgrade pip 
         # установка зависимостей
-        pip install -r api_yamdb/requirements.txt 
+        pip install -r ../../api_yamdb/requirements.txt 
 
     - name: Test with flake8 and pytest
       run: |
+        cd ../..
         # запуск проверки проекта по flake8
         python -m flake8
         # запуск pytest
