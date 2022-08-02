@@ -22,11 +22,17 @@ jobs:
 
     - name: Test with flake8 and pytest
       run: |
-        # запуск проверки проекта по flake8
-        python -m flake8
-        # запуск pytest
-        #cd ../..
-        python -m pytest
+        # flake8 check
+          python -m flake8
+          
+          # pytest
+          python -m pytest
+          
+          # manage.py dir
+          cd api_yamdb/
+          
+          # dev tests
+          python manage.py test
   
   build_and_push_to_docker_hub:
     name: Push Docker image of web to Docker Hub
@@ -80,4 +86,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выполнен!
+        message: ${{ github.workflow }} успешно выполнен!          
