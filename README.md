@@ -1,6 +1,6 @@
 # Проект API для YaMDb #
 
-![workflow](https://github.com/Marsonic-del/yamdb_final/actions/workflows/yamdb_workflow.yaml/badge.svg)
+[workflow](https://github.com/Marsonic-del/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 ## Описание: ##
 Учебный проект YaMDb для курса Яндекс.Практикум
