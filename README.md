@@ -1,6 +1,6 @@
 # Проект API для YaMDb #
 
-## Адрес сайта: http://51.250.17.93/
+## Адрес сайта: http://51.250.17.93/redoc/
 
 ![workflow](https://github.com/Marsonic-del/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
@@ -17,30 +17,62 @@
 ## Технологии: ##
 Python 3.10
 Django 2.2.16
+docker 20.10.17
+nginx
 djangorestframework 3.12.4
 ## Как запустить проект: ##
 Скачайте проект с репозитория на локальную машину:
 
-    https://github.com/Loradil/api_yamdb.git
+    https://github.com/Marsonic-del/yamdb_final
 
-Создайте и активируйте виртуальное окружение:
+```sh
+cd infra
+```
 
-    python -m venv venv
-    
+Создайте файл  .env в папке infra c константами:
+  DB_ENGINE=django.db.backends.postgresql # указываем, что работаем с postgresql
+  DB_NAME # имя базы данных
+  POSTGRES_USER # логин для подключения к базе данных
+  POSTGRES_PASSWORD # пароль для подключения к БД
+  DB_HOST # название сервиса (контейнера)
+  DB_PORT # порт для подключения к БД
+  SECRET_KEY
 
-Установие зависимости из файла requirements.txt:
+Дальше:
 
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
+```sh
+docker-compose -d
+```
 
-Выполните миграции:
-    
-    python manage.py migrate
+Если нужно перенести локалтную базу данных (файл fixtures.join):
 
+```sh
+docker cp fixtures.json <container_id>:/app
+docker exec -it <container_id> bash
+python3 manage.py shell
+>>> from django.contrib.contenttypes.models import ContentType
+>>> ContentType.objects.all().delete()
+>>> quit()
+python manage.py loaddata fixtures.json
 
-Запустите проект
+```
 
-    python manage.py runserver
+Миграции:
+```sh
+docker-compose exec web python manage.py makemigrations users reviews
+docker-compose exec web python manage.py migrate
+```
+
+Создание суперюзера:
+
+```sh
+docker-compose exec web python manage.py createsuperuser
+```
+
+Собираем статику:
+```sh
+docker-compose exec web python manage.py collectstatic --no-input
+```
 
 ## Ресурсы API YaMDb ##
 * Ресурс auth: аутентификация.<br>
